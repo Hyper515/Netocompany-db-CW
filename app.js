@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 
 app.get('/search', (req, res) => {
   const { query } = req.query;
-  db.all(`SELECT * FROM Patient WHERE ForeName LIKE '%${query}%'`, (err, rows) => {
+  db.all(`SELECT * FROM Patient WHERE Forename LIKE '%${query}%'`, (err, rows) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
@@ -42,8 +42,8 @@ app.get('/edit/:NhsNo', (req, res) => {
 
 app.post('/edit/:NhsNo', (req, res) => {
   const { NhsNo } = req.params;
-  const { ForeName, Dob, Gender, MobNo } = req.body;
-  db.run('UPDATE Patient SET ForeName = ?, Dob = ?, Gender = ?, MobNo = ? WHERE NhsNo = ?', [ForeName, Dob, Gender, MobNo, NhsNO], (err) => {
+  const { Forename, Dob, Gender, MobNo } = req.body;
+  db.run('UPDATE Patient SET Forename = ?, Dob = ?, Gender = ?, MobNo = ? WHERE NhsNo = ?', [Forename, Dob, Gender, MobNo, NhsNO], (err) => {
     if (err) {
       res.status(500).send(err.message);
     } else {

@@ -5,15 +5,15 @@ html
     h1 Edit Patient
     form(action=`/edit/${patient.NhsNo}` method='post')
       label(for='name') Name:
-      input(type='text' name='name' value=patient.ForeName)
+      input(type='text' name='name' value=patient.Forename)
       div
       label(for='age') Age:
       input(type='date' name='age' value=patient.Dob)
       div
       label(for='gender') Gender:
       select(name='gender')
-        option(value='male' selected=patient.Gender === 'male') Male
-        option(value='female' selected=patient.Gender === 'female') Female
+        option(value='male' selected=patient.Gender === 'male') M
+        option(value='female' selected=patient.Gender === 'female') F
       div
       label(for='phone') Phone:
       input(type='text' name='phone' value=patient.MobNo)
