@@ -29,9 +29,9 @@ app.get('/search', (req, res) => {
   });
 });
 
-app.get('/edit/:NhsNO', (req, res) => {
-  const { NhsNO } = req.params;
-  db.get('SELECT * FROM Patient WHERE NhsNO = ?', [NhsNO], (err, row) => {
+app.get('/edit/:NhsNo', (req, res) => {
+  const { NhsNo } = req.params;
+  db.get('SELECT * FROM Patient WHERE NhsNo = ?', [NhsNo], (err, row) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
@@ -40,10 +40,10 @@ app.get('/edit/:NhsNO', (req, res) => {
   });
 });
 
-app.post('/edit/:NhsNO', (req, res) => {
-  const { NhsNO } = req.params;
+app.post('/edit/:NhsNo', (req, res) => {
+  const { NhsNo } = req.params;
   const { ForeName, Dob, Gender, MobNo } = req.body;
-  db.run('UPDATE Patient SET ForeName = ?, Dob = ?, Gender = ?, MobNo = ? WHERE NhsNO = ?', [ForeName, Dob, Gender, MobNo, NhsNO], (err) => {
+  db.run('UPDATE Patient SET ForeName = ?, Dob = ?, Gender = ?, MobNo = ? WHERE NhsNo = ?', [ForeName, Dob, Gender, MobNo, NhsNO], (err) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
