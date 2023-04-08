@@ -1,0 +1,21 @@
+html
+  head
+    title Edit Patient
+  body
+    h1 Edit Patient
+    form(action=`/edit/${patient.NhsNO}` method='post')
+      label(for='name') Name:
+      input(type='text' name='name' value=patient.ForeName)
+      div
+      label(for='age') Age:
+      input(type='date' name='age' value=patient.Dob)
+      div
+      label(for='gender') Gender:
+      select(name='gender')
+        option(value='male' selected=patient.Gender === 'male') Male
+        option(value='female' selected=patient.Gender === 'female') Female
+      div
+      label(for='phone') Phone:
+      input(type='text' name='phone' value=patient.MobNo)
+      div
+      button(type='submit') Save
