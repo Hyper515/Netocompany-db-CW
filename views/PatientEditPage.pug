@@ -3,7 +3,7 @@ html
     title Edit Patient
   body
     h1 Edit Patient
-    form(action=`/edit/${patient.NhsNo}` method='post')
+    form(action=`/PatientEditPage/${patient.NhsNo}` method='post')
       label(for='name') Name:
       input(type='text' name='name' value=patient.Forename)
       div

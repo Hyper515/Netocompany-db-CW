@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
-      res.render('index', { Patient: rows });
+      res.render('PatientIndexPage', { Patient: rows });
     }
   });
 });
@@ -24,23 +24,23 @@ app.get('/search', (req, res) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
-      res.render('index', { Patient: rows });
+      res.render('PatientIndexPage', { Patient: rows });
     }
   });
 });
 
-app.get('/edit/:NhsNo', (req, res) => {
+app.get('/PatientEditPage/:NhsNo', (req, res) => {
   const { NhsNo } = req.params;
   db.get('SELECT * FROM Patient WHERE NhsNo = ?', [NhsNo], (err, row) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
-      res.render('edit', { patient: row });
+      res.render('PatientEditPage', { patient: row });
     }
   });
 });
 
-app.post('/edit/:NhsNo', (req, res) => {
+app.post('/PatientEditPage/:NhsNo', (req, res) => {
   const { NhsNo } = req.params;
   const { Forename, Dob, Gender, MobNo } = req.body;
   db.run('UPDATE Patient SET Forename = ?, Dob = ?, Gender = ?, MobNo = ? WHERE NhsNo = ?', [Forename, Dob, Gender, MobNo, NhsNO], (err) => {
