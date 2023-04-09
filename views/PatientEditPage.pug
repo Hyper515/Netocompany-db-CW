@@ -1,8 +1,9 @@
 html
   head
-    title Edit Patient
-  body
+    h1.title-company Netocompany
     h1 Edit Patient
+    link(rel='stylesheet' href='/style.css')
+  body
     form(action=`/PatientEditPage/${patient.NhsNo}` method='post')
       label(for='forename') Forename:
       input(type='text' name='name' value=patient.Forename)
@@ -28,4 +29,4 @@ html
       input(type='text' name='phone' value=patient.MobNo)
       div
       button(type='submit') Save
-      a.button(href='/') Back
+      button.button-format(type='button', onclick='window.location.href="/patients";') Back

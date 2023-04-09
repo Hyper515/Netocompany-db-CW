@@ -5,10 +5,15 @@ const bodyParser = require('body-parser');
 const app = express();
 const db = new sqlite3.Database('patients.Vo2.db');
 
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
+  res.render('StartPage');
+});
+
+app.get('/patients', (req, res) => {
   db.all('SELECT * FROM Patient', (err, rows) => {
     if (err) {
       res.status(500).send(err.message);
