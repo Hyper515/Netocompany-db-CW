@@ -4,10 +4,13 @@ html
   body
     h1 Edit Patient
     form(action=`/PatientEditPage/${patient.NhsNo}` method='post')
-      label(for='name') Name:
+      label(for='forename') Forename:
       input(type='text' name='name' value=patient.Forename)
       div
-      label(for='age') Age:
+      label(for='surname') Surname:
+      input(type='text' name='name' value=patient.Surname)
+      div
+      label(for='dob') Date Of Birth:
       input(type='date' name='age' value=patient.Dob)
       div
       label(for='gender') Gender:
@@ -15,7 +18,14 @@ html
         option(value='male' selected=patient.Gender === 'male') M
         option(value='female' selected=patient.Gender === 'female') F
       div
+      label(for='address') Address:
+      input(type='text' name='address' value=patient.Address)
+      div
+      label(for='postcode') Postcode:
+      input(type='text' name='postcode' value=patient.Postcode)
+      div
       label(for='phone') Phone:
       input(type='text' name='phone' value=patient.MobNo)
       div
       button(type='submit') Save
+      a.button(href='/') Back
