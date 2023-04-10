@@ -1,6 +1,8 @@
 # Netocompany-db-cw
 database for my group coursework
 
+use these commands to set up (install the server components & download the initial project)
+
 mkdir patient-manager - create a folder called “patient-manager”
 
 cd patient-manager - access the chosen folder
@@ -10,6 +12,8 @@ npm init -y
 npm install express sqlite3 pug body-parser --save
 
 git clone https://github.com/Hyper515/Netocompany-db-cw.git - pulls the latest files to the current directory where the command is run from
+
+============================================
 
 these commands will help commit and push your files into the repository
 
