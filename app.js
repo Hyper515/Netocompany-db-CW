@@ -58,8 +58,8 @@ app.get('/PatientEditPage/:NhsNo', (req, res) => {
 
 app.post('/PatientSaveToDB/:NhsNo', (req, res) => {
   const { NhsNo } = req.params;
-  const { Forename, Dob, Gender, MobNo } = req.body;
-  db.run('UPDATE Patient SET Forename = ?, Dob = ?, Gender = ?, MobNo = ? WHERE NhsNo = ?', [Forename, Dob, Gender, MobNo, NhsNo], (err) => {
+  const { txtForename, txtSurname, txtDob, txtGender, txtAddress, txtPostcode, txtMobNo } = req.body;
+  db.run('UPDATE Patient SET Forename = ?, Surname = ?, Dob = ?, Gender = ?, Address = ?, Postcode = ?, MobNo = ? WHERE NhsNo = ?', [txtForename, txtSurname, txtDob, txtGender, txtAddress, txtPostcode, txtMobNo, NhsNo], (err) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
