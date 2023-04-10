@@ -3,6 +3,11 @@ database for my group coursework
 
 use these commands to set up (install the server components & download the initial project)
 
+Git bash download link - https://git-scm.com/downloads
+actual link to windows executable - https://github.com/git-for-windows/git/releases/download/v2.40.0.windows.1/Git-2.40.0-64-bit.exe
+
+cd c: - bring you to the C drive
+
 mkdir patient-manager - create a folder called “patient-manager”
 
 cd patient-manager - access the chosen folder
