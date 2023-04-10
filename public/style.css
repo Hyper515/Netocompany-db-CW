@@ -48,7 +48,7 @@ button {
   margin: 0.5rem 0;
   border: none;
   border-radius: 0.25rem;
-  background-color: green;
+  background-color: #00703C;
   color: #fff;
   cursor: pointer;
 }
@@ -60,7 +60,7 @@ button {
   margin-left: 10rem;
   border: none;
   border-radius: 0.25rem;
-  background-color: green;
+  background-color: #00703C;
   color: #fff;
   cursor: pointer;
 }
