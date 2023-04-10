@@ -23,13 +23,24 @@ app.get('/patients', (req, res) => {
   });
 });
 
-app.get('/search', (req, res) => {
-  const { query } = req.query;
-  db.all(`SELECT * FROM Patient WHERE Forename LIKE '%${query}%'`, (err, rows) => {
+app.get('/Patient', (req, res) => {
+  const { txtForename, txtSurname } = req.query;
+  db.all(`SELECT * FROM Patient WHERE Forename LIKE '%${txtForename}%' AND Surname LIKE '%${txtSurname}%'`, (err, rows) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
       res.render('PatientIndexPage', { Patient: rows });
+    }
+  });
+});
+
+app.get('/PatientRecords/:NhsNo', (req, res) => {
+  const { NhsNo } = req.params;
+  db.get('SELECT * FROM Patient WHERE NhsNo = ?', [NhsNo], (err, row) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res.render('PatientPersonalRecordsPage', { patient: row });
     }
   });
 });
@@ -45,14 +56,14 @@ app.get('/PatientEditPage/:NhsNo', (req, res) => {
   });
 });
 
-app.post('/PatientEditPage/:NhsNo', (req, res) => {
+app.post('/PatientSaveToDB/:NhsNo', (req, res) => {
   const { NhsNo } = req.params;
   const { Forename, Dob, Gender, MobNo } = req.body;
-  db.run('UPDATE Patient SET Forename = ?, Dob = ?, Gender = ?, MobNo = ? WHERE NhsNo = ?', [Forename, Dob, Gender, MobNo, NhsNO], (err) => {
+  db.run('UPDATE Patient SET Forename = ?, Dob = ?, Gender = ?, MobNo = ? WHERE NhsNo = ?', [Forename, Dob, Gender, MobNo, NhsNo], (err) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
-      res.redirect('/');
+      res.redirect(`/PatientRecords/${NhsNo}`);
     }
   });
 });

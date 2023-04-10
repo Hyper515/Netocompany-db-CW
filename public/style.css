@@ -92,7 +92,12 @@ a:hover {
   text-decoration: underline;
 }
 
-p {
+label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.p-format {
   margin-left: 10rem;
 }
 
