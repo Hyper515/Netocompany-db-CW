@@ -1,0 +1,33 @@
+html
+  head
+    h1.title-company Netocompany
+    h1 Edit Appointment
+    link(rel='stylesheet' href='/style.css')
+  body
+  form(action=`/AppointmentSaveToDB/${appointment.RefNo}` method='post')
+    label(for='date') Date:
+    input(type='date' name='txtDate' value=appointment.Date)
+    div
+    label(for='time') Time:
+    input(type='text' name='txtTime' value=appointment.Time)
+    div
+    label(for='note') Note:
+    input(type='text' name='txtNote' value=appointment.Note)
+    div
+    label(for='cost') Cost:
+    input(type='number' name='txtCost' value=appointment.Cost step="0.01" min="0")
+    div
+    //label(for='status') Status:
+    //select(name='ddlStatus')
+    //  option(value='1' selected=(appointment.Status == 1)) Scheduled
+    //  option(value='2' selected=(appointment.Status == 2)) Cancelled
+    //  option(value='3' selected=(appointment.Status == 3)) Completed
+    //div
+    label(for='doctor') Doctor:
+      select(name='ddlStaff')
+        each doctor in doctors
+          option(value=doctor.Id selected=(doctor.Id == appointment.Id)) #{doctor.Forename} #{doctor.Surname} (#{doctor.Profession})
+    div
+    
+    button(type='submit') Save
+    button.button-format(type='button', onclick='window.location.href="/";') Back

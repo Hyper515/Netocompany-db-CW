@@ -68,6 +68,36 @@ app.post('/PatientSaveToDB/:NhsNo', (req, res) => {
   });
 });
 
+// Render the appointment edit form
+app.get('/Appointment/:refNo/edit', (req, res) => {
+  const refNo = req.params.refNo;
+  db.get(`SELECT * FROM Appointment WHERE RefNo = ?`, [refNo], (err, row) => {
+    if (err) {
+      console.error(err.message);
+    }
+    db.all(`SELECT Id, Forename, Surname, Profession FROM Staff WHERE Profession != 'Admin'`, (err, rows) => {
+      if (err) {
+        console.error(err.message);
+      }
+      res.render('AppointmentEditPage', { title: 'Edit Appointment', appointment: row, doctors: rows });
+    });
+  });
+});
+
+// Save changes to an appointment
+app.post('/appointment/:refNo/save', (req, res) => {
+  const refNo = req.params.refNo;
+  const { txtDate, txtTime, txtNote, txtCost, txtStatus, txtNhsNo, txtId } = req.body;
+  db.run(`UPDATE Appointment SET Date = ?, Time = ?, Note = ?, Cost = ?, Status = ?, NhsNo = ?, Id = ? WHERE RefNo = ?`,
+    [date, time, note, cost, status, nhsNo, id, refNo], (err) => {
+      if (err) {
+        console.error(err.message);
+      }
+      res.redirect('/appointments');
+    });
+});
+
+
 app.listen(3001, () => {
   console.log('Server started on http://localhost:3001');
 });
