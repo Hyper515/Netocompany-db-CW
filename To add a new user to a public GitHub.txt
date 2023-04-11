@@ -1,0 +1,12 @@
+To add a new user to a public GitHub repository so that they can commit, you can follow these steps:
+
+    Navigate to the repository on GitHub
+    Click on the "Settings" tab on the right-hand side of the repository
+    Click on "Manage access" in the left-hand menu
+    Click on the "Invite a collaborator" button on the right-hand side
+    Enter the username or email address of the user you want to add
+    Click on the "Add [username/email address]" button
+    GitHub will send an email to the user inviting them to collaborate on the repository
+    Once they accept the invitation, they will have the ability to commit changes to the repository
+
+Note: To add a user as a collaborator, you need to have the appropriate permissions to do so. If you are not the owner of the repository, you may need to request that the owner add the user as a collaborator.
