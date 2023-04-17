@@ -1,6 +1,11 @@
 # Netocompany-db-cw
 database for my group coursework
 
+How to Guide
+https://www.youtube.com/watch?v=52ueMqN1Mkc
+
+============================================
+
 use these commands to set up (install the server components & download the initial project)
 
 Git bash download link - https://git-scm.com/downloads
