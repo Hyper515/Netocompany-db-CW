@@ -5,6 +5,7 @@ html
     link(rel='stylesheet' href='/style.css')
   body
     form 
+      // Displays all current patients information
       label(for='nhsno') NhsNo:
       p #{patient.NhsNo}
       div
@@ -29,6 +30,10 @@ html
       label(for='phone') Phone:
       p #{patient.MobNo}
       div
+
+      // transport user to the Edit page
       button(type='button', onclick=`window.location.href='/PatientEditPage/${patient.NhsNo}'`) Edit
+
+      // returns the user back to the patient page
       button.button-format(type='button', onclick='window.location.href="/patients";') Back
       

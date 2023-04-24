@@ -5,6 +5,7 @@ html
     link(rel='stylesheet' href='/style.css')
   body
     form(action=`/PatientSaveToDB/${patient.NhsNo}` method='post')
+      // Displays information for the user to update if desired
       label(for='forename') Forename:
       input(type='text' name='txtForename' value=patient.Forename)
       div
@@ -14,6 +15,7 @@ html
       label(for='dob') Date Of Birth:
       input(type='date' name='txtDob' value=patient.Dob)
       div
+      // Displays the options the user can pick for their gender
       label(for='gender') Gender:
       select(name='txtGender')
         option(value='male' selected=patient.Gender === 'male') M
@@ -28,5 +30,7 @@ html
       label(for='phone') Phone:
       input(type='text' name='txtMobNo' value=patient.MobNo)
       div
+      // Will save the current information to the database
       button(type='submit') Save
+      // Returns the user to the patient index page
       button.button-format(type='button', onclick='window.location.href="/patients";') Back
