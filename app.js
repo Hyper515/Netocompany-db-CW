@@ -68,6 +68,19 @@ app.post('/PatientSaveToDB/:NhsNo', (req, res) => {
   });
 });
 
+// Save changes to an appointment
+app.post('/appointment/:refNo/save', (req, res) => {
+  const refNo = req.params.refNo;
+  const { txtDate, txtTime, txtNote, txtCost, txtStatus, txtNhsNo, txtId, txtReason } = req.body;
+  db.run(`UPDATE Appointment SET Date = ?, Time = ?, Note = ?, Cost = ?, Status = ?, NhsNo = ?, Id = ?, Reason = ? WHERE RefNo = ?`,
+    [txtDate, txtTime, txtNote, txtCost, txtStatus, txtNhsNo, txtId, txtReason, refNo], (err) => {
+      if (err) {
+        console.error(err.message);
+      }
+      res.redirect('/appointments');
+    });
+});
+
 // Render the appointment edit form
 app.get('/Appointment/:refNo/edit', (req, res) => {
   const refNo = req.params.refNo;
@@ -96,6 +109,56 @@ app.post('/appointment/:refNo/save', (req, res) => {
       res.redirect('/appointments');
     });
 });
+
+// Ivan's Work
+// Doctor View Appointments page
+
+app.get('/vaccines', (req, res) => {
+  db.all('SELECT * FROM Vaccines', (err, rows) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res.render('VaccineRecordsPage', { Vaccines: rows });
+    }
+  });
+});
+
+app.get('/Vaccines', (req, res) => {
+  const { txtNhsNo } = req.query;
+  db.all(`SELECT * FROM Vaccines WHERE NhsNo LIKE '%${txtNhsNo}%'`, (err, rows) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res.render('VaccineRecordsPage', { Vaccines: rows });
+    }
+  });
+});
+
+app.get('/Vaccines/:NhsNo', (req, res) => {
+  const { NhsNo } = req.params;
+  db.get('SELECT * FROM Vaccines WHERE NhsNo = ?', [NhsNo], (err, row) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res.render('VaccineRecordsPage', { vaccines: row });
+    }
+  });
+});
+
+app.post('/VaccineRecordsPage/:NhsNo', (req, res) => {
+  const { NhsNo } = req.params;
+  const { txtMobNo } = req.body;
+  db.run('UPDATE Patient SET Forename = ?, Surname = ?, Dob = ?, Gender = ?, Address = ?, Postcode = ?, MobNo = ? WHERE NhsNo = ?', [txtForename, txtSurname, txtDob, txtGender, txtAddress, txtPostcode, txtMobNo, NhsNo], (err) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res.redirect(`/PatientRecords/${NhsNo}`);
+    }
+  });
+});
+
+
+// _______________________________________________________________
 
 
 app.listen(3001, () => {
