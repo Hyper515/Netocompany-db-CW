@@ -14,6 +14,118 @@ app.get('/', (req, res) => {
   res.render('StartPage');
 });
 
+// ------------------------------------------------------------------------------------
+// Show the Staff Login Page
+app.get('/loginStaff', (req, res) => {
+  // needs to render "AdminLoginPage" instead of redirecting to "/Admins" below. 
+  // use PatientLoginPage.pug as a template
+  // AdminLoginPage is also used in the /loginStaff route  
+
+  // res.render('AdminLoginPage');
+  res.redirect('/Admins');
+});
+
+// Staff Login validation
+app.post('/loginStaff', (req, res) => {
+  const forename = req.body.forename;
+  const surname = req.body.surname;
+  const Id = req.body.password;
+
+  // Check if staff credentials are correct
+  db.all('SELECT * FROM Staff WHERE Forename = ? AND Surname = ? AND Id = ?', [forename, surname, Id], function(err, rows) {
+    if (err) throw err;
+
+    if (rows.length == 1) {
+      // Staff login successful, render AdminRecordsPage.pug
+      res.redirect(`/AdminRecords/${Id}`);
+    } else {
+      // Staff login failed, render login.pug with error message
+      res.render('AdminLoginPage', { message: 'Invalid credentials' });
+    }
+  });
+});
+
+// ------------------------------------------------------------------------------------
+
+// Show the Patient Login Page
+app.get('/loginPatient', (req, res) => {
+  res.render('PatientLoginPage');
+});
+
+// Patient Login validation
+app.post('/loginPatient', (req, res) => {
+  var forename = req.body.forename;
+  var surname = req.body.surname;
+  var NhsNo = req.body.password;
+
+  // perform authentication check with database
+  db.all('SELECT * FROM Patient WHERE Forename = ? AND Surname = ? AND NhsNo = ?', [forename, surname, NhsNo], function(err, rows) {
+    if (err) throw err;
+
+    //Checks that only one row comes back from the database
+    if (rows.length == 1) {
+      // login successful
+      res.redirect(`/PatientRecords/${NhsNo}`);
+    } else {
+      // login failed
+      res.render('PatientLoginPage', { message: 'Invalid login details' });
+    }
+  });
+});
+// ------------------------------------------------------------------------------------
+
+app.get('/Admins', (req, res) => {
+  db.all(`SELECT * FROM Staff WHERE Profession != 'Admin'`, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    res.render('StaffIndexPage', { staffs: rows });
+  });
+});
+
+app.get('/AdminRecords/:id', (req, res) => {
+  const id = req.params.id;
+
+  db.get('SELECT * FROM Staff WHERE Id = ?', id, (err, row) => {
+    if (err) {
+      console.error(err.message);
+    } else {
+      res.render('AdminRecordsPage', { staff: row });
+    }
+  });
+});
+
+// Get route for the edit page
+app.get('/AdminEditPage/:id', (req, res) => {
+  const staffId = req.params.id;
+
+  // Retrieve the staff member from the database
+  db.get('SELECT * FROM Staff WHERE Id = ?', [staffId], (error, row) => {
+    if (error) throw error;
+
+    // Render the edit page with the staff member's data
+    res.render('AdminEditPage', { staff: row });
+  });
+});
+
+// Post route for updating a staff member's data
+app.post('/AdminSaveToDB/:Id', (req, res) => {
+  const staffId = req.params.Id;
+  const { forename, surname, dob, gender, email, mobNo, address, profession } = req.body;
+
+  // Update the staff member's data in the database
+  db.run(
+    'UPDATE Staff SET Forename = ?, Surname = ?, Dob = ?, Gender = ?, Email = ?, MobNo = ?, Address = ?, Profession = ? WHERE Id = ?',
+    [forename, surname, dob, gender, email, mobNo, address, profession, staffId],
+    (error, results) => {
+      if (error) throw error;
+
+      // Redirect to the staff member's view page
+      res.redirect(`/AdminRecords/${staffId}`);
+    }
+  );
+});
+
 // Render Patient Index page
 app.get('/patients', (req, res) => {
   db.all('SELECT * FROM Patient', (err, rows) => {
