@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS Vaccines (
     DateEntered     TEXT          NOT NULL,
     ProducereCode   VARCHAR (255) NOT NULL,
     Booster         VARCHAR (255) NOT NULL,
-    NhsNo           INTEGER       REFERENCES Patient (NhsNO),
+    NhsNo           INTEGER       REFERENCES Patient (NhsNo),
     Type            TEXT          NOT NULL,
     PRIMARY KEY (
         DoseNo

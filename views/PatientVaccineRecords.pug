@@ -1,0 +1,33 @@
+html
+  head
+    h1.title-company Netocompany
+    link(rel='stylesheet' href='/style.css')
+  body
+    form 
+      label(for='nhsno') NhsNo:
+      p #{patient.NhsNo}
+      div
+      label(for='forename') Forename:
+      p #{patient.Forename}
+      div
+      label(for='surname') Surname:
+      p #{patient.Surname}
+      div
+      label(for='dob') Date Of Birth:
+      p #{patient.Dob}
+      div
+      label(for='gender') Gender:
+      p #{patient.Gender}
+      div
+      label(for='address') Address:
+      p #{patient.Address}
+      div
+      label(for='postcode') Postcode:
+      p #{patient.Postcode}
+      div
+      label(for='phone') Phone:
+      p #{patient.MobNo}
+      div
+      button(type='button', onclick=`window.location.href='/PatientEditPage/${patient.NhsNo}'`) Edit
+      button.button-format(type='button', onclick='window.location.href="/patients";') Back
+      

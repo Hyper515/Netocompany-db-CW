@@ -24,7 +24,8 @@ app.get('/patients', (req, res) => {
 });
 
 app.get('/Patient', (req, res) => {
-  const { txtForename, txtSurname } = req.query;
+  const { txtForename, txtSurname} = req.query;
+  console.log(txtForename)
   db.all(`SELECT * FROM Patient WHERE Forename LIKE '%${txtForename}%' AND Surname LIKE '%${txtSurname}%'`, (err, rows) => {
     if (err) {
       res.status(500).send(err.message);
@@ -111,52 +112,17 @@ app.post('/appointment/:refNo/save', (req, res) => {
 });
 
 // Ivan's Work
-// Doctor View Appointments page
-
-app.get('/vaccines', (req, res) => {
-  db.all('SELECT * FROM Vaccines', (err, rows) => {
-    if (err) {
-      res.status(500).send(err.message);
-    } else {
-      res.render('VaccineRecordsPage', { Vaccines: rows });
-    }
-  });
-});
 
 app.get('/Vaccines', (req, res) => {
-  const { txtNhsNo } = req.query;
-  db.all(`SELECT * FROM Vaccines WHERE NhsNo LIKE '%${txtNhsNo}%'`, (err, rows) => {
+  const { NhsNo } = req.query;
+  db.all('SELECT * FROM Vaccines WHERE NhsNo = ?', [NhsNo], (err, rows) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
-      res.render('VaccineRecordsPage', { Vaccines: rows });
+      res.render('VaccineRecordsPage', { Vaccines: rows});
     }
   });
 });
-
-app.get('/Vaccines/:NhsNo', (req, res) => {
-  const { NhsNo } = req.params;
-  db.get('SELECT * FROM Vaccines WHERE NhsNo = ?', [NhsNo], (err, row) => {
-    if (err) {
-      res.status(500).send(err.message);
-    } else {
-      res.render('VaccineRecordsPage', { vaccines: row });
-    }
-  });
-});
-
-app.post('/VaccineRecordsPage/:NhsNo', (req, res) => {
-  const { NhsNo } = req.params;
-  const { txtMobNo } = req.body;
-  db.run('UPDATE Patient SET Forename = ?, Surname = ?, Dob = ?, Gender = ?, Address = ?, Postcode = ?, MobNo = ? WHERE NhsNo = ?', [txtForename, txtSurname, txtDob, txtGender, txtAddress, txtPostcode, txtMobNo, NhsNo], (err) => {
-    if (err) {
-      res.status(500).send(err.message);
-    } else {
-      res.redirect(`/PatientRecords/${NhsNo}`);
-    }
-  });
-});
-
 
 // _______________________________________________________________
 
