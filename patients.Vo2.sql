@@ -31,12 +31,12 @@ CREATE TABLE IF NOT EXISTS Appointment (
     REFERENCES Staff (Id) 
 );
 
-INSERT INTO Appointment (RefNo, Date, Time, Note, Cost, Status, NhsNo, Id) VALUES (1, '2023-04-10', '10:00', '', 100.0, 0, 1234567890, 1);
-INSERT INTO Appointment (RefNo, Date, Time, Note, Cost, Status, NhsNo, Id) VALUES (2, '2023-04-11', '11:00', '', 150.0, 0, 2345678901, 1);
+INSERT INTO Appointment (RefNo, Date, Time, Note, Cost, Status, NhsNo, Id) VALUES (1, '2023-04-10', '10:00', 'Poisoning', 100.0, 0, 1234567890, 1);
+INSERT INTO Appointment (RefNo, Date, Time, Note, Cost, Status, NhsNo, Id) VALUES (2, '2023-04-11', '11:00', 'Pneumonia', 150.0, 0, 2345678901, 1);
 INSERT INTO Appointment (RefNo, Date, Time, Note, Cost, Status, NhsNo, Id) VALUES (3, '2023-04-10', '09:00', 'Flu shot', 35.0, 0, 1234567350, 4);
 INSERT INTO Appointment (RefNo, Date, Time, Note, Cost, Status, NhsNo, Id) VALUES (4, '2023-04-11', '11:00', 'Annual checkup', 50.0, 0, 2345678961, 5);
 INSERT INTO Appointment (RefNo, Date, Time, Note, Cost, Status, NhsNo, Id) VALUES (5, '2023-04-12', '14:00', 'X-ray', 75.0, 0, 3456789012, 6);
-INSERT INTO Appointment (RefNo, Date, Time, Note, Cost, Status, NhsNo, Id) VALUES (6, '2023-04-13', '16:00', '', 100.0, 0, 4567890123, 7);
+INSERT INTO Appointment (RefNo, Date, Time, Note, Cost, Status, NhsNo, Id) VALUES (6, '2023-04-13', '16:00', 'Intestinal infectious diseases', 100.0, 0, 4567890123, 7);
 
 -- Table: Patient
 CREATE TABLE IF NOT EXISTS Patient (

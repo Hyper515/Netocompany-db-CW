@@ -242,23 +242,39 @@ app.get('/Vaccines', (req, res) => {
   });
 });
 
-app.get('/Appointment', (req, res) => {
-  const refNo = req.params.refNo;
-  db.get(`SELECT * FROM Appointment WHERE RefNo = ?`, [refNo], (err, row) => {
+// _______________________________________________________________
+
+// app.get('/appointment', (req, res) => {
+//   db.all('SELECT * FROM Appointment', (err, rows) => {
+//     if (err) {
+//       res.status(500).send(err.message);
+//     } else {
+//       res.render('DoctorBookedAppointments', { Appointment: rows });
+//     }
+//   });
+// });
+
+app.get('/appointment', (req, res) => {
+  db.all('SELECT * FROM Appointment', (err, rows) => {
     if (err) {
-      console.error(err.message);
+      console.error(err);
+    } else {
+      res.render('DoctorBookedAppointments', { Appointment: rows });
     }
-    db.all(`SELECT Id, Forename, Surname, Profession FROM Staff WHERE Profession != 'Admin'`, (err, rows) => {
-      if (err) {
-        console.error(err.message);
-      }
-      res.render('DoctorBookedAppointments', {appointment: row, doctors: rows });
-    });
   });
 });
 
-// _______________________________________________________________
-
+app.post('/PatientSaveToDB/:NhsNo', (req, res) => {
+  const { NhsNo } = req.params;
+  const { txtForename, txtSurname, txtDob, txtGender, txtAddress, txtPostcode, txtMobNo } = req.body;
+  db.run('UPDATE Patient SET Forename = ?, Surname = ?, Dob = ?, Gender = ?, Address = ?, Postcode = ?, MobNo = ? WHERE NhsNo = ?', [txtForename, txtSurname, txtDob, txtGender, txtAddress, txtPostcode, txtMobNo, NhsNo], (err) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res.redirect(`/PatientRecordss`);
+    }
+  });
+});
 
 app.listen(3001, () => {
   console.log('Server started on http://localhost:3001');
