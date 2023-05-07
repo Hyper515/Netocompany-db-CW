@@ -216,19 +216,6 @@ app.get('/Appointment/:refNo/edit', (req, res) => {
   });
 });
 
-// Save changes to an appointment
-app.post('/appointment/:refNo/save', (req, res) => {
-  const refNo = req.params.refNo;
-  const { txtDate, txtTime, txtNote, txtCost, txtStatus, txtNhsNo, txtId } = req.body;
-  db.run(`UPDATE Appointment SET Date = ?, Time = ?, Note = ?, Cost = ?, Status = ?, NhsNo = ?, Id = ? WHERE RefNo = ?`,
-    [date, time, note, cost, status, nhsNo, id, refNo], (err) => {
-      if (err) {
-        console.error(err.message);
-      }
-      res.redirect('/appointments');
-    });
-});
-
 // Ivan's Work
 
 app.get('/Vaccines', (req, res) => {
