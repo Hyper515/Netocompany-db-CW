@@ -7,18 +7,17 @@ html
     h1 Appointments booked with you
     form(action='/Appointment' method='get')
     table
-      tr
-        th Patitient's Nane
-        th Appointment Date
-        th Appointment Time
-        th Reason 
-        
-      each appointment in Appointment
         tr
-          td #{appointment.Forename}
-          td #{appointment.Date}
-          td #{appointment.Time}
-          td #{appointment.Note}
-
+          th Patitient's Nane
+          th Appointment Date
+          th Appointment Time
+          th Reason 
+          
+        each appointment in Appointment
+          tr
+            td #{appointment.Forename}
+            td #{appointment.Date}
+            td #{appointment.Time}
+            td #{appointment.Note}
     div
-      button.button-format(type='button', onclick='window.location.href="/";') Back
+    button.button-format(type='button', onclick='window.location.href="/";') Back
