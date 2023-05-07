@@ -1,0 +1,38 @@
+html
+  head
+    h1.title-company Netocompany
+    title Vaccine Records
+    link(rel='stylesheet' href='/style.css')
+  body
+    h1 Patient Vaccine Records
+    form(action='/Vaccines' method='get')
+      input(type='text' name='NhsNo' placeholder='NhsNumber...')
+      button(type='submit') Search
+    table
+      tr
+        th Vaccine manufacturer
+        th Vaccination date
+        th Batch number
+        th Disease target
+        th Vaccine type
+        th Site
+        th Country of vaccination
+        th Display name
+        th Booster
+        th Procedure code
+
+      each vaccine in Vaccines
+        tr
+          td #{vaccine.Manufacturer}
+          td #{vaccine.Date}
+          td #{vaccine.BatchNo}
+          td #{vaccine.DiseaseTargeted}
+          td #{vaccine.Product}
+          td #{vaccine.Site}
+          td #{vaccine.Country}
+          td #{vaccine.DisplayName}
+          td #{vaccine.Booster}
+          td #{vaccine.ProducereCode}
+
+    div
+      button.button-format(type='button', onclick='window.location.href="/";') Back

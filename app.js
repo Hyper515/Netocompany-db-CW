@@ -139,7 +139,8 @@ app.get('/patients', (req, res) => {
 
 // Render the Patient index page with only the matching name and surnames
 app.get('/Patient', (req, res) => {
-  const { txtForename, txtSurname } = req.query;
+  const { txtForename, txtSurname} = req.query;
+  console.log(txtForename)
   db.all(`SELECT * FROM Patient WHERE Forename LIKE '%${txtForename}%' AND Surname LIKE '%${txtSurname}%'`, (err, rows) => {
     if (err) {
       res.status(500).send(err.message);
@@ -186,6 +187,19 @@ app.post('/PatientSaveToDB/:NhsNo', (req, res) => {
   });
 });
 
+// Save changes to an appointment
+app.post('/appointment/:refNo/save', (req, res) => {
+  const refNo = req.params.refNo;
+  const { txtDate, txtTime, txtNote, txtCost, txtStatus, txtNhsNo, txtId, txtReason } = req.body;
+  db.run(`UPDATE Appointment SET Date = ?, Time = ?, Note = ?, Cost = ?, Status = ?, NhsNo = ?, Id = ?, Reason = ? WHERE RefNo = ?`,
+    [txtDate, txtTime, txtNote, txtCost, txtStatus, txtNhsNo, txtId, txtReason, refNo], (err) => {
+      if (err) {
+        console.error(err.message);
+      }
+      res.redirect('/appointments');
+    });
+});
+
 // Render the appointment edit form
 app.get('/Appointment/:refNo/edit', (req, res) => {
   const refNo = req.params.refNo;
@@ -214,6 +228,31 @@ app.post('/appointment/:refNo/save', (req, res) => {
       res.redirect('/appointments');
     });
 });
+
+// Ivan's Work
+
+app.get('/Vaccines', (req, res) => {
+  const { NhsNo } = req.query;
+  db.all('SELECT * FROM Vaccines WHERE NhsNo = ?', [NhsNo], (err, rows) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res.render('VaccineRecordsPage', { Vaccines: rows});
+    }
+  });
+});
+
+app.get('/appointment', (req, res) => {
+  db.all('SELECT * FROM Appointment', (err, rows) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res.render('DoctorBookedAppointments', { Appointment: rows });
+    }
+  });
+});
+
+// _______________________________________________________________
 
 
 app.listen(3001, () => {
