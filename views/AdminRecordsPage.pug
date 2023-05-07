@@ -1,0 +1,54 @@
+html
+  head
+    h1.title-company Netocompany
+    h1 Doctors Records
+    link(rel='stylesheet' href='/style.css')
+  body
+    form 
+      // Displays all current Doctors information
+       label(for='Id') Id:
+        p #{staff.Id}
+        div
+
+      label(for='Forename') Forename:
+        p #{staff.Forename}
+        div
+
+      label(for='Surname') Surname:
+        p #{staff.Surname}
+        div
+
+      label(for='Dob') Dob:
+        p #{staff.Dob}
+        div
+
+      label(for='Gender') Gender:
+        p #{staff.Gender}
+        div
+
+      label(for='Email') Email:
+        p #{staff.Email}
+        div
+
+      label(for='MobNo') MobNo:
+        p #{staff.MobNo}
+        div
+
+      label(for='Address') Address:
+        p #{staff.Address}
+        div
+
+      label(for='Profession') Profession:
+        p #{staff.Profession}
+        div
+
+      // transport user to the Edit page
+      //button(type='button', onclick=`window.location.href='/AdminEditPage/${staff.Id}'`) Edit
+      button(type='button', onclick=`window.location.href='/AdminEditPage/${staff.Id}'`) Edit
+
+      // returns the user back to the patient page
+      //button.button-format(type='button', onclick='window.location.href="/Admins";') Back
+      button.button-format(type='button', onclick='window.location.href="/";') Exit
+      
+
+      // Made By 

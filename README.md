@@ -29,7 +29,7 @@ these commands will help– commit and push your files into the repository
 
 git commit -m "message"
 
-git push -u origin main
+
 
 ============================================
 

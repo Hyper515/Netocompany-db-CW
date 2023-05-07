@@ -1,0 +1,41 @@
+html
+  head
+    h1.title-company Netocompany
+    title Staff Manager
+    link(rel='stylesheet' href='/style.css')
+  body
+    h1 Staff Manager
+    form(action='/Staff' method='get')
+      input(type='text' name='txtForename' placeholder='First name...')
+      input(type='text' name='txtSurname' placeholder='Surname...')
+      button(type='submit') Search
+    table
+      tr
+        th Id
+        th Forename
+        th Surname
+        th Dob
+        th Gender
+        th Email
+        th MobNo
+        th Address
+        th Profession
+      each staff in staffs
+        tr
+          td #{staff.Id}
+          td #{staff.Forename}
+          td #{staff.Surname}
+          td #{staff.Dob}
+          td #{staff.Gender}
+          td #{staff.Email}
+          td #{staff.MobNo}
+          td #{staff.Address}
+          td #{staff.Profession}
+        td
+          a(href='/AdminRecords/' + staff.Id) View
+
+        td
+          a(href='/AdminEditPage/' + staff.Id) Edit
+
+    div
+      button.button-format(type='button', onclick='window.location.href="/";') Back

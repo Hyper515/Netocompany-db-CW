@@ -1,10 +1,11 @@
 html
   head
     h1.title-company Netocompany
-    h1 Edit Patient
+    h1 Patient Records
     link(rel='stylesheet' href='/style.css')
   body
     form 
+      // Displays all current patients information
       label(for='nhsno') NhsNo:
       p #{patient.NhsNo}
       div
@@ -29,6 +30,13 @@ html
       label(for='phone') Phone:
       p #{patient.MobNo}
       div
+
+      // transport user to the Edit page
       button(type='button', onclick=`window.location.href='/PatientEditPage/${patient.NhsNo}'`) Edit
-      button.button-format(type='button', onclick='window.location.href="/patients";') Back
+
+      // returns the user back to the patient page
+      //button.button-format(type='button', onclick='window.location.href="/patients";') Back
+      button.button-format(type='button', onclick='window.location.href="/";') Exit
       
+
+      // Made By Ethan Akin

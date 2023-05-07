@@ -1,0 +1,19 @@
+html
+  head
+    h1.title-company Netocompany
+    link(rel='stylesheet' href='/style.css')
+  body
+    h1 Patient Login
+    form(method='POST', action='/loginPatient')
+      label(for='forename') Forename:
+      input(type='text', name='forename')
+      div
+      label(for='surname') Surname:
+      input(type='text', name='surname')
+      div
+      label(for='password') NHS Number:
+      input(type='password', name='password')
+      div
+      button(type='submit') Login
+
+
