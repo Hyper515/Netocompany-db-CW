@@ -124,6 +124,16 @@ app.get('/Vaccines', (req, res) => {
   });
 });
 
+app.get('/appointment', (req, res) => {
+  db.all('SELECT * FROM Appointment', (err, rows) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res.render('DoctorBookedAppointments', { Appointment: rows });
+    }
+  });
+});
+
 // _______________________________________________________________
 
 

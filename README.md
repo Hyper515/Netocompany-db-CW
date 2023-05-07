@@ -25,7 +25,7 @@ git clone https://github.com/Hyper515/Netocompany-db-cw.git - pulls the latest f
 
 ============================================
 
-these commands will help commit and push your files into the repository
+these commands will help– commit and push your files into the repository
 
 git commit -m "message"
 
