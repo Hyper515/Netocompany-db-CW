@@ -242,13 +242,18 @@ app.get('/Vaccines', (req, res) => {
   });
 });
 
-app.get('/appointment', (req, res) => {
-  db.all('SELECT * FROM Appointment', (err, rows) => {
+app.get('/Appointment', (req, res) => {
+  const refNo = req.params.refNo;
+  db.get(`SELECT * FROM Appointment WHERE RefNo = ?`, [refNo], (err, row) => {
     if (err) {
-      res.status(500).send(err.message);
-    } else {
-      res.render('DoctorBookedAppointments', { Appointment: rows });
+      console.error(err.message);
     }
+    db.all(`SELECT Id, Forename, Surname, Profession FROM Staff WHERE Profession != 'Admin'`, (err, rows) => {
+      if (err) {
+        console.error(err.message);
+      }
+      res.render('DoctorBookedAppointments', {appointment: row, doctors: rows });
+    });
   });
 });
 
