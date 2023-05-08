@@ -5,23 +5,22 @@ html
     link(rel='stylesheet' href='/style.css')
   body
     h1 Appointments booked with you
-    form(action='/Appointment' method='get')
-    table
-      tr
-        th Patitient's NhsNo
-        th Appointment Date
-        th Appointment Time
-        th Reason 
-
-      if Appointment 
-      each appointment in Appointment
+    form
+      table
         tr
-          td #{appointment.NhsNo}
-          td #{appointment.Date}
-          td #{appointment.Time}
-          td #{appointment.Note}
-          td
-            a(href='/PatientRecords/' + appointment.NhsNo) View
+          th Patitient's NhsNo
+          th Appointment Date
+          th Appointment Time
+          th Reason 
 
-    div
-    button.button-format(type='button', onclick='window.location.href="/";') Back
+        each appointment in Appointments
+          tr
+            td #{appointment.NhsNo}
+            td #{appointment.Date}
+            td #{appointment.Time}
+            td #{appointment.Note}
+            td
+              a(href='/PatientRecords/' + appointment.NhsNo) View
+
+      div
+      button.button-format(type='button', onclick='window.history.back();') Back

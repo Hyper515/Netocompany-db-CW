@@ -241,12 +241,16 @@ app.get('/Vaccines', (req, res) => {
 //   });
 // });
 
-app.get('/appointment', (req, res) => {
-  db.all('SELECT * FROM Appointment', (err, rows) => {
+app.get('/appointment/:id', (req, res) => {
+  const staffId = req.params.id;
+
+  db.all(`SELECT * FROM Appointment WHERE Id = ?`, [staffId], (err, rows) => {
     if (err) {
       console.error(err);
     } else {
-      res.render('DoctorBookedAppointments', { Appointment: rows });
+      //console.debug(rows);
+      //console.debug(staffId);
+      res.render('DoctorBookedAppointments', { Appointments: rows });
     }
   });
 });

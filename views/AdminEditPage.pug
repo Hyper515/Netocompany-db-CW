@@ -8,25 +8,33 @@ html
       // Displays information for the user to update if desired
       label(for='forename') Forename:
       input(type='text', name='forename', value=staff.Forename)
+      div
       label(for='surname') Surname:
       input(type='text', name='surname', value=staff.Surname)
+      div
       label(for='dob') Date of Birth:
       input(type='date', name='dob', value=staff.Dob)
+      div
       label(for='gender') Gender:
       select(name='gender')
         option(value='M', selected=staff.Gender === 'M') Male
         option(value='F', selected=staff.Gender === 'F') Female
+      div
       label(for='email') Email:
       input(type='email', name='email', value=staff.Email)
+      div
       label(for='mobno') Mobile Number:
       input(type='text', name='mobno', value=staff.MobNo)
+      div
       label(for='address') Address:
       input(type='text', name='address', value=staff.Address)
+      div
       label(for='profession') Profession:
       input(type='text', name='profession', value=staff.Profession)
+      div
       button(type='submit') Save Changes
       // Returns the user to the Admin index page
-      //button.button-format(type='button', onclick='window.location.href="/patients";') Back
+      button.button-format(type='button', onclick='window.history.back();') Back
       button.button-format(type='button', onclick='window.location.href="/";') Exit
 
 
