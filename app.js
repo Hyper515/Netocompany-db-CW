@@ -17,12 +17,8 @@ app.get('/', (req, res) => {
 // ------------------------------------------------------------------------------------
 // Show the Staff Login Page
 app.get('/loginStaff', (req, res) => {
-  // needs to render "AdminLoginPage" instead of redirecting to "/Admins" below. 
-  // use PatientLoginPage.pug as a template
-  // AdminLoginPage is also used in the /loginStaff route  
 
-  // res.render('AdminLoginPage');
-  res.redirect('/Admins');
+   res.render('AdminLoginPage');
 });
 
 // Staff Login validation
